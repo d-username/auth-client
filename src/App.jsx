@@ -9,22 +9,40 @@ export default function App() {
     const [loginResponse, setLoginResponse] = useState('');
 
     const register = async (e) => {
-        e.preventDefault();
-        // Write your register code here
-
-
+      e.preventDefault();
+      // Write your register code here
+      fetch("http://localhost:4000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((userData) => {
+          setRegisterResponse(
+            `Thank you for registering, ${userData.data.username}!`
+          );
+        });
     };
 
     const login = async (e) => {
         e.preventDefault();
         // Write your login code here
-
-        
+           fetch("http://localhost:4000/login", {
+             method: "POST",
+             headers: {
+               "Content-Type": "application/json",
+             },
+             body: JSON.stringify(user),
+           })
+             .then((res) => res.json())
+             .then((userData) => {
+               setLoginResponse(
+                 `You are now logged in with token:, ${userData.data}!`
+               );
+             });
     };
-
-
-
-
 
 
     // You can safely ignore everything below this line, it's just boilerplate
