@@ -38,8 +38,9 @@ export default function App() {
            })
              .then((res) => res.json())
              .then((userData) => {
-               setLoginResponse(
-                 `You are now logged in with token:, ${userData.data}!`
+                localStorage.setItem("token", `${userData.data}`);
+                setLoginResponse(
+                 `You are now logged in with token:, ${localStorage.getItem("token")}!`
                );
              });
     };
